@@ -1,5 +1,5 @@
-- [toast](https://github.com/wclimb/wat/tree/master/zh-CN/toast.md)
-- [dialog](https://github.com/wclimb/wat/tree/master/zh-CN/dialog.md)
+- [toast](https://github.com/wclimb/wat/blob/master/docs/zh-CN/toast.md)
+- [dialog](https://github.com/wclimb/wat/blob/master/docs/zh-CN/dialog.md)
 
 # toast 提示（全局调用）
 
