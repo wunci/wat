@@ -11,6 +11,7 @@ npm install wat-ui -S
 ```
 import Vue from 'vue'
 import Wat from 'wat-ui'
+import 'wat-ui/lib/wat.css'
 
 Vue.use(Wat)
 ```
