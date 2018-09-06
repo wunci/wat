@@ -1,0 +1,33 @@
+@font-face {
+    font-family: "watFont";
+    src: url('watFont.ttf?t=1536199954639') format('truetype');
+    /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+}
+
+.wat-icon {
+    font-family: "watFont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.wat-icon-fail2:before {
+    content: "\e625";
+}
+
+.wat-icon-success:before {
+    content: "\e60d";
+}
+
+.wat-icon-success1:before {
+    content: "\e627";
+}
+
+.wat-icon-spinner:before {
+    content: "\e600";
+}
+
+.wat-icon-fail:before {
+    content: "\e63d";
+}
