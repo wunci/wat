@@ -1,11 +1,11 @@
 - [toast](https://github.com/wclimb/wat/blob/master/docs/zh-CN/toast.md)
 - [dialog](https://github.com/wclimb/wat/blob/master/docs/zh-CN/dialog.md)
 
-# toast 提示（全局调用）
+## toast 提示（全局调用）
 
 模拟系统的消息提示框组件，用于消息提示、展示状态。
 
-## 轻提示
+### 轻提示
 ```
 <template>
   <button @click="open">轻提示</button>
@@ -22,7 +22,7 @@
   }
 </script>
 ```
-## 轻提示位置
+### 轻提示位置
 
 ```
 <template>
@@ -41,7 +41,7 @@
 </script>
 ```
 
-## 显示成功失败
+### 显示成功失败
 
 ```
 <template>
@@ -59,7 +59,7 @@
   }
 </script>
 ```
-## loading
+### loading
 
 ```
 <template>
@@ -77,7 +77,7 @@
   }
 </script>
 ```
-## 完整功能展示
+### 完整功能展示
 ```
 // 提示
 this.$toast({
@@ -109,7 +109,7 @@ this.$toast.fail('失败')
 // 关闭所有弹窗
 this.$toast.closeAll()
 ```
-## options
+### options
 | 参数   | 说明    |  类型  |  可选值 | 默认值|
 | :----: | :----:   | :----: |:----: |:----: |
 |   text    |   提示文字    |   string    |  -    |  -    |

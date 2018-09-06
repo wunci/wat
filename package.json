@@ -1,6 +1,6 @@
 {
   "name": "wat-ui",
-  "version": "0.2.0",
+  "version": "0.2.3",
   "private": false,
   "main": "./dist/wat.common.js",
   "license": "MIT",
@@ -9,6 +9,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/wclimb/wat"
+  },
+  "bugs": {
+    "url": "https://github.com/wclimb/wat/issues"
   },
   "scripts": {
     "build-bundle": "vue-cli-service build --target lib --name wat ./src/index.js",

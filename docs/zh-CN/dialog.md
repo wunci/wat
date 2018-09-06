@@ -1,11 +1,11 @@
 - [toast](https://github.com/wclimb/wat/blob/master/docs/zh-CN/toast.md)
 - [dialog](https://github.com/wclimb/wat/blob/master/docs/zh-CN/dialog.md)
 
-# dialog 弹出框（全局调用）
+## dialog 弹出框（全局调用）
 
 模拟系统的消息弹出框组件，用于消息提示、操作处理。
 
-## alert
+### alert
 ```
 <template>
   <button @click="open">弹出弹窗</button>
@@ -22,7 +22,7 @@
   }
 </script>
 ```
-## confirm
+### confirm
 ```
 <template>
   <button @click="open">弹出弹窗</button>
@@ -43,7 +43,7 @@
   }
 </script>
 ```
-## 完整实例演示
+### 完整实例演示
 ```
 this.$dialog.confirm({
     title: '这是title',
@@ -58,7 +58,7 @@ this.$dialog.confirm({
     // 点击了取消
 })
 ```
-## options
+### options
 | 参数   | 说明    |  类型  |  可选值 | 默认值|
 | :----: | :----:   | :----: |:----: |:----: |
 |   title    |   顶部title文字    |   string    |  -    |  提示    |
