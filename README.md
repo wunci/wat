@@ -14,6 +14,13 @@ import Wat from 'wat-ui'
 
 Vue.use(Wat)
 ```
+## CDN
+
+```
+<link rel="stylesheet" href="https://unpkg.com/wat-ui/lib/wat.min.css">
+<script src="https://unpkg.com/wat-ui/lib/wat.min.js"></script>
+```
+
 
 ## Documents
 
