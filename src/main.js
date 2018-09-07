@@ -6,7 +6,6 @@ import router from './router.js'
 Vue.config.productionTip = false
 Vue.use(Toast)
 Vue.use(Dialog)
-// Vue.prototype.$toast = Toast
 new Vue({
     router,
   render: h => h(App)
