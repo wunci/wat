@@ -1,4 +1,4 @@
 module.exports = {
-    runtimeCompiler: true,
-    outputDir: 'lib'
-}
+  runtimeCompiler: true,
+  outputDir: 'lib',
+};

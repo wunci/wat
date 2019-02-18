@@ -1,110 +1,147 @@
 <template>
-    <div id="app">
-        <h3>toast</h3>
-        <button @click="showToast('success','success')">success</button>
-        <button @click="showToast('fail','fail')">fail</button>
-        <button @click="showDirection('bottom','I\'m from bottom')">bottom</button>
-        <button @click="showDirection('top','I\'m from top')">top</button>
-        <button @click="loading('circular','loading...')">loading-circular</button>
-        <button @click="loading('spinner','loading...')">loading-spinner</button>
-        <button @click="closeAll">closeAll</button>
-        <h3>dialog</h3>
-        <button @click="alert">alert</button>
-        <button @click="confirm">confirm</button>
-    </div>
+  <div id="app">
+    <h3>toast</h3>
+    <button @click="showToast('success','success')">success</button>
+    <button @click="showToast('fail','fail')">fail</button>
+    <button @click="showDirection('bottom','I\'m from bottom')">bottom</button>
+    <button @click="showDirection('top','I\'m from top')">top</button>
+    <button @click="loading('circular','loading...')">loading-circular</button>
+    <button @click="loading('spinner','loading...')">loading-spinner</button>
+    <button @click="closeAll">closeAll</button>
+    <h3>dialog</h3>
+    <button @click="alert">alert</button>
+    <button @click="confirm">confirm</button>
+    <picker
+      :columns="aList"
+      v-model="pickerValue"
+      @change="pcikerChange"
+    />
+    <!-- <popup-picker :columns="aList" /> -->
+  </div>
 </template>
 
 <script>
-
+import Picker from "./components/picker/src/index";
+import PopupPicker from "./components/popup-picker/src/index";
 export default {
-    name: "app",
-    mounted() {},
-    methods: {
-        showToast(type = "success",text) {
-            this.$toast({
-                text,
-                mask: true,
-                disabledClick:false,
-                type,
-                // direction:'bottom',
-                duration: 0,
-                zIndex:3000,
-                onClose: (val) => {
-                    console.log(val.disabledClick);
-                }
-            });
-        },
-        closeAll() {
-            this.$toast.closeAll();
-        },
-        showDirection(direction,text){
-            this.$toast[direction](text);
-        },
-        loading(loading,text){
-            this.$toast({
-                text,
-                mask: true,
-                //   disabledClick:true,
-                type:'loading',
-                loadingType:loading,
-                duration:0,
-                onClose: (val) => {
-                    console.log(val.text);
-                }
-            });
-        },
-        alert(){
-            this.$dialog.alert({
-                content: 'This is content',
-                title: 'Tips',
-                disabledClick: false,
-                zIndex: 3000,
-                cancelBtnText:'cancel',
-                confirmBtnText:'confirm',
-            }).then(res=>{
-                this.$toast.top('click confirm')
-            }).catch(res=>{
-                this.$toast.top('click cancel')
-            })
-        },
-        confirm(){
-            this.$dialog.confirm({
-                content:'This is content',
-                title:'Tips',
-                disabledClick:true,
-                cancelBtnText:'cancel',
-                confirmBtnText:'confirm',
-            }).then(res=>{
-                this.$toast('click confirm')                
-            }).catch(res=>{
-                this.$toast.top('click cancel')                
-            })
+  name: "app",
+  components: {
+    Picker,
+    PopupPicker
+  },
+  data() {
+    return {
+      pickerValue: [23, 41, 2, 1112],
+      aList: [
+        [1, 23, 123, 41, 4, 12, 112, 12, 31, 2, 4],
+        [1, 23, 123, 41, 4, 12, 112, 12, 31, 2, 4],
+        [1, 23, 123, 41, 4, 12, 112, 12, 31, 2, 4],
+        [1, 23, 123, 41, 4, 12, 112, 12, 31, 2, 4]
+      ]
+    };
+  },
+  mounted() {},
+  methods: {
+    pcikerChange(val) {
+      console.log("picker value", val);
+    },
+    showToast(type = "success", text) {
+      this.$toast({
+        text,
+        mask: true,
+        disabledClick: false,
+        type,
+        // direction:'bottom',
+        duration: 0,
+        zIndex: 3000,
+        onClose: val => {
+          console.log(val.disabledClick);
         }
+      });
+    },
+    closeAll() {
+      this.$toast.closeAll();
+    },
+    showDirection(direction, text) {
+      this.$toast[direction](text);
+    },
+    loading(loading, text) {
+      this.$toast({
+        text,
+        mask: true,
+        //   disabledClick:true,
+        type: "loading",
+        loadingType: loading,
+        duration: 0,
+        onClose: val => {
+          console.log(val.text);
+        }
+      });
+    },
+    alert() {
+      this.$dialog
+        .alert({
+          content: "This is content",
+          title: "Tips",
+          disabledClick: false,
+          zIndex: 3000,
+          cancelBtnText: "cancel",
+          confirmBtnText: "confirm",
+          callback: () => {
+            console.log(1);
+          }
+        })
+        .then(res => {
+          this.$toast.top("click confirm");
+        })
+        .catch(res => {
+          this.$toast.top("click cancel");
+        });
+    },
+    confirm() {
+      this.$dialog
+        .confirm({
+          content: "This is content",
+          title: "Tips",
+          disabledClick: true,
+          cancelBtnText: "cancel",
+          confirmBtnText: "confirm",
+          callback: () => {
+            console.log(1);
+          }
+        })
+        .then(res => {
+          this.$toast("click confirm");
+        })
+        .catch(res => {
+          this.$toast.top("click cancel");
+        });
     }
+  }
 };
 </script>
 
 <style scope lang="less">
-@import './style/common.less';
-#app{
-    h3{
-        border-left: 5px solid #3cc51f;
-        padding-left: 15px;
-        margin: 10px ;
+@import "./style/common.less";
+#app {
+  h3 {
+    border-left: 5px solid #3cc51f;
+    padding-left: 15px;
+    margin: 10px;
+  }
+  button {
+    padding: 0 20px;
+    height: 30px;
+    background: #fff;
+    border: none;
+    margin: 10px;
+    border-radius: 10px;
+    color: #333;
+    border: 1px solid #ccc;
+    outline: none;
+    &:active {
+      background: #ccc;
     }
-    button{
-        padding: 0 20px;
-        height: 30px;
-        background: #fff;
-        border: none;
-        margin: 10px;
-        border-radius: 10px;
-        color: #333;
-        border:1px solid #ccc;
-        outline: none;
-        &:active{
-            background: #ccc;
-        }
-    }
+  }
 }
 </style>

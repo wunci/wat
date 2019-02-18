@@ -1,7 +1,7 @@
-import Dialog from './src/main'
+import Dialog from './src/main';
 
-const install = (Vue)=>{
-    Vue.prototype.$dialog = Dialog
-}
+const install = Vue => {
+  Vue.prototype.$dialog = Dialog;
+};
 
-export default install
+export default install;
