@@ -1,21 +1,21 @@
 @import url('./font/watFont.css');
 html {
-    color: #333;
-    background: #fff;
-    overflow-y: scroll;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%
+  color: #333;
+  background: #fff;
+  overflow-y: scroll;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
 }
 
 html * {
-    outline: 0;
-    -webkit-text-size-adjust: none;
-    -webkit-tap-highlight-color: transparent
+  outline: 0;
+  -webkit-text-size-adjust: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body,
 html {
-    font-family: sans-serif
+  font-family: sans-serif;
 }
 
 article,
@@ -56,35 +56,35 @@ td,
 textarea,
 th,
 ul {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 input,
 select,
 textarea {
-    font-size: 100%
+  font-size: 100%;
 }
 
 table {
-    border-collapse: collapse;
-    border-spacing: 0
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 fieldset,
 img {
-    border: 0
+  border: 0;
 }
 
 abbr,
 acronym {
-    border: 0;
-    font-variant: normal
+  border: 0;
+  font-variant: normal;
 }
 
 del {
-    text-decoration: line-through
+  text-decoration: line-through;
 }
 
 address,
@@ -95,19 +95,19 @@ dfn,
 em,
 th,
 var {
-    font-style: normal;
-    font-weight: 500
+  font-style: normal;
+  font-weight: 500;
 }
 
 ol,
 ul,
 li {
-    list-style: none
+  list-style: none;
 }
 
 caption,
 th {
-    text-align: left
+  text-align: left;
 }
 
 h1,
@@ -116,71 +116,114 @@ h3,
 h4,
 h5,
 h6 {
-    font-size: 100%;
-    font-weight: 500
+  font-size: 100%;
+  font-weight: 500;
 }
 
 q:after,
 q:before {
-    content: ''
+  content: '';
 }
 
 sub,
 sup {
-    font-size: 75%;
-    line-height: 0;
-    position: relative;
-    vertical-align: baseline
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
 }
 
 sup {
-    top: -.5em
+  top: -0.5em;
 }
 
 sub {
-    bottom: -.25em
+  bottom: -0.25em;
 }
 
 a:hover {
-    text-decoration: none
+  text-decoration: none;
 }
 
 a,
 ins {
-    text-decoration: none
+  text-decoration: none;
 }
 
 button,
-input[type=button],
-input[type=file],
-input[type=submit] {
-    cursor: pointer;
-    -webkit-appearance: none
+input[type='button'],
+input[type='file'],
+input[type='submit'] {
+  cursor: pointer;
+  -webkit-appearance: none;
 }
 
+// flex
+.wat-flex {
+  display: flex;
+}
+
+.wat-flex-row {
+  flex-direction: row;
+}
+
+.wat-flex-column {
+  flex-direction: column;
+}
+
+.wat-flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.wat-flex-item {
+  flex: 1
+}
+
+// model
 .wat-model {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 2000;
-    &.wat-model_transparent {
-        background: transparent;
-    }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2000;
+  &.wat-model_transparent {
+    background: transparent;
+  }
 }
+
 .wat-fade-in-enter-active {
-    animation: watFadeIn 0.5s;
+  animation: watFadeIn 0.5s;
 }
+
 .wat-fade-in-leave-active {
-    animation: watFadeIn 0.5s reverse;
+  animation: watFadeIn 0.5s reverse;
 }
+
 @keyframes watFadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.wat-popup-in-enter-active {
+  animation: watPopupIn 0.3s linear;
+}
+
+.wat-popup-in-leave-active {
+  animation: watPopupIn 0.3s linear reverse;
+}
+
+@keyframes watPopupIn {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
 }

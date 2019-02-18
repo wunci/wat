@@ -1,7 +1,7 @@
-import Toast from './src/main'
+import Toast from './src/main';
 
-const install = (Vue)=>{
-    Vue.prototype.$toast = Toast
-}
+const install = Vue => {
+  Vue.prototype.$toast = Toast;
+};
 
-export default install
+export default install;
