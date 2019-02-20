@@ -111,12 +111,12 @@ export default {
         },
         {
           name: "广西001",
-          value: "gz",
+          value: "gx01",
           parent: "china002"
         },
         {
           name: "广西002",
-          value: "sz",
+          value: "gx02",
           parent: "china002"
         },
         {
