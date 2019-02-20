@@ -38,10 +38,12 @@
 export default {
   name: "picker",
   props: {
+    // 初始化传进来的值
     lists: {
       type: Array,
       required: true
     },
+    // 限制列数
     columns: {
       type: String
     },
@@ -53,7 +55,7 @@ export default {
     return {
       bIsLinkage: false,
       nWaitTime: 150,
-      aLists: [],
+      aLists: [], // copy from lists
       aPickerData: [],
       aResult: []
     };
@@ -111,39 +113,40 @@ export default {
   },
   methods: {
     touchstart(e) {
-      let index = e.touches[0].target.dataset.index;
-      this.aPickerData[index].nStartY = e.touches[0].clientY;
+      let nIndex = +e.touches[0].target.dataset.index;
+      this.aPickerData[nIndex].nStartY = e.touches[0].clientY;
       this.nStartTime = new Date().getTime();
     },
     touchmove(e) {
-      let index = e.touches[0].target.dataset.index;
+      let nIndex = +e.touches[0].target.dataset.index;
       let clientY = e.touches[0].clientY;
       let nScrollY = parseInt(
-        this.aPickerData[index].nEndPosition +
+        this.aPickerData[nIndex].nEndPosition +
           clientY -
-          this.aPickerData[index].nStartY
+          this.aPickerData[nIndex].nStartY
       );
-      this.aPickerData[index].oPosition = {
+      this.aPickerData[nIndex].oPosition = {
         transform: `translate3d(0, ${nScrollY}px, 0)`
       };
     },
     touchend(e) {
-      let index = e.changedTouches[0].target.dataset.index;
+      let nIndex = +e.changedTouches[0].target.dataset.index;
       let sDirection =
-        e.changedTouches[0].clientY - this.aPickerData[index].nStartY > 0
+        e.changedTouches[0].clientY - this.aPickerData[nIndex].nStartY > 0
           ? "up"
           : "down";
       // 加速度
       let nSpeed =
-        e.changedTouches[0].clientY - this.aPickerData[index].nStartY;
+        e.changedTouches[0].clientY - this.aPickerData[nIndex].nStartY;
+      if (nSpeed === 0) return;
       let nTime = new Date().getTime() - this.nStartTime;
       if (nTime < 300) {
         nSpeed = nSpeed * 3;
         this.nWaitTime = 500;
       }
 
-      let nScrollY = parseInt(this.aPickerData[index].nEndPosition + nSpeed);
-      let nMaxLen = this.aLists[index].length - 4;
+      let nScrollY = parseInt(this.aPickerData[nIndex].nEndPosition + nSpeed);
+      let nMaxLen = this.aLists[nIndex].length - 4;
       // 处理边界问题
       if (Math.abs(nScrollY) > nMaxLen * 34 && sDirection === "down") {
         nScrollY = -nMaxLen * 34;
@@ -152,20 +155,21 @@ export default {
       } else if (nScrollY % 34 !== 0) {
         nScrollY = Math.round(nScrollY / 34) * 34;
       }
-      this.aPickerData[index].oPosition = {
+      this.aPickerData[nIndex].oPosition = {
         transform: `translate3d(0, ${nScrollY}px, 0)`,
         transition: "all .5s ease-out"
       };
-      this.aPickerData[index].nEndPosition = nScrollY;
+      this.aPickerData[nIndex].nEndPosition = nScrollY;
       // if linkage
-      if (this.bIsLinkage) {
+      if (this.bIsLinkage && +this.columns !== +nIndex + 1) {
         this.aLists = this.resolveLinkageData(
           this.aLists,
-          +index,
+          +nIndex,
           3 - nScrollY / 34
         );
         this.aPickerData.forEach((oData, i) => {
-          if (i > index) {
+          if (i > nIndex) {
+            oData.nEndPosition = 102;
             oData.oPosition = {
               transform: `translate3d(0, 102px, 0)`,
               transition: "all .3s ease-out"
@@ -173,38 +177,48 @@ export default {
           }
         });
       }
+
       // return result
-      let aResult = this.aPickerData.map((val, index) => {
-        let result = this.aLists[index][3 - val.nEndPosition / 34];
+      let aResult = this.aPickerData.map((val, nIndex) => {
+        let result = this.aLists[nIndex][3 - val.nEndPosition / 34];
         return typeof result === "object" ? result.value : result;
       });
       this.aResult = aResult;
     },
-    // 解析联动数据
-    resolveLinkageData(columns, nStartIdx = 0, nFristIdx) {
-      let len = columns.length - 1;
+    /**
+     * @description 解析联动数据
+     * @param {Array} [aColumns] 当前列数据，需要找下列数
+     * @param {Number} [nStartIdx=0] 当前处理的列下标
+     * @param {Number} [nFristIdx=0] 列表里的第几位数
+     */
+    resolveLinkageData(aColumns, nStartIdx = 0, nFristIdx = 0) {
+      if (+this.columns === 1) return aColumns;
+      let len = aColumns.length - 1;
       let bIsNext = false;
-      let value = columns[nStartIdx][nFristIdx ? nFristIdx : 0].value;
+      let value = aColumns[nStartIdx][nFristIdx].value;
       // 如果当前滑动的列表存在，则重置
-      if (columns[nStartIdx + 1]) {
-        columns[nStartIdx + 1] = undefined;
+      if (aColumns[nStartIdx + 1]) {
+        aColumns[nStartIdx + 1] = undefined;
       }
       // 循环查找关联的下一级
       for (let i = 0; i < this.lists.length; i++) {
         if (this.lists[i].parent === value) {
-          if (!columns[nStartIdx + 1]) {
-            columns[nStartIdx + 1] = [this.lists[i]];
+          if (!aColumns[nStartIdx + 1]) {
+            aColumns[nStartIdx + 1] = [this.lists[i]];
           } else {
-            columns[nStartIdx + 1].push(this.lists[i]);
+            aColumns[nStartIdx + 1].push(this.lists[i]);
           }
           bIsNext = true;
         }
       }
-      // 如果没有下一级结束递归
-      if (!bIsNext) {
-        return columns;
+      // 如果没有下一级或者不需要那么多列的情况下（滑动了后续需要联动变化，直接判断aColumns.length === +this.columns会有问题，因为这里aColumns不会清空，需要判断当前更新数据的下标）结束递归
+      if (
+        !bIsNext ||
+        (aColumns.length === +this.columns && nStartIdx + 2 === +this.columns)
+      ) {
+        return aColumns;
       }
-      return this.resolveLinkageData(columns, nStartIdx + 1, 0);
+      return this.resolveLinkageData(aColumns, nStartIdx + 1, 0);
     }
   }
 };
