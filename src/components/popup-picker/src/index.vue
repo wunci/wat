@@ -1,59 +1,82 @@
 <template>
   <div>
-    <transition name="wat-popup-in">
-      <div
-        class="wat-popup-picker"
-        v-if="show"
-      >
-        <div>
-          <div>取消</div>
-          <div>确定</div>
+    <button @click="fnShowModel">popup-picker</button>
+    <Popup
+      v-model="bIsPopupShow"
+      @on-hide="fnHidePopup"
+      @on-show="fnShowPopup"
+    >
+      <div class="wat-popup-picker">
+        <div class="wat-popup-picker_control">
+          <div
+            @click="fnTapCancel"
+            class="wat-popip-control_btn"
+          >取消</div>
+          <div v-if="title !== ''">{{title}}</div>
+          <div
+            @click="fnTapConfirm"
+            class="wat-popip-control_btn"
+          >确定</div>
         </div>
-        <div class="wat-flex">
-          <Picker
-            :columns="columns"
-            @change="popUpPicker"
-            v-model="value"
-          />
-        </div>
+        <Picker
+          :lists="lists"
+          @on-change="fnChangePopUpPicker"
+          v-model="defaultValue"
+        />
       </div>
-    </transition>
-    <transition name="wat-fade-in">
-      <div
-        v-if="show"
-        class="wat-model"
-        @click="hideModel"
-      ></div>
-    </transition>
+    </Popup>
   </div>
 </template>
 
 <script>
 import Picker from "../../picker/src/index";
+import Popup from "../../popup/src/index";
 export default {
   name: "popup-picker",
   components: {
-    Picker
+    Picker,
+    Popup
   },
   props: {
-    columns: {
+    lists: {
       type: Array,
       required: true
-    }
+    },
+    title: {
+      type: [String, Number]
+    },
+    value: Array
   },
   data() {
     return {
-      show: true,
-      value: "13"
+      bIsPopupShow: false,
+      defaultValue: this.value,
+      pickerValue: []
     };
   },
   methods: {
-    hideModel() {
-      this.show = false;
+    fnShowModel() {
+      this.bIsPopupShow = true;
     },
-    popUpPicker(val) {
-      console.log(val);
-      this.$emit("change", val);
+    fnChangePopUpPicker(val) {
+      this.pickerValue = val;
+      this.$emit("on-change", val);
+    },
+    fnHidePopup() {
+      this.bIsPopupShow = false;
+      this.$emit("on-hide");
+    },
+    fnShowPopup() {
+      this.$emit("on-show");
+    },
+    fnTapCancel() {
+      this.bIsPopupShow = false;
+      this.$emit("on-hide");
+    },
+    fnTapConfirm() {
+      this.bIsPopupShow = false;
+      this.$emit("on-confirm", this.pickerValue);
+      this.$emit("on-hide");
     }
   }
 };

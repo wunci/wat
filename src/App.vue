@@ -15,14 +15,22 @@
       :lists="aLinkedList"
       v-model="pickerValue"
       columns="3"
-      @change="pcikerChange"
+      @on-change="pcikerChange"
     />
     <picker
       :lists="aList"
       v-model="pickerValue"
-      @change="pcikerChange"
+      @on-change="pcikerChange"
     />
-    <!-- <popup-picker :columns="aList" /> -->
+    <popup-picker
+      :lists="aList"
+      :title="'12'"
+      v-model="pickerValue"
+      @on-confirm="popupPickerConfirm"
+      @on-show="popupPickerShow"
+      @on-hide="popupPickerHide"
+      @on-change="popupPickerChange"
+    />
   </div>
 </template>
 
@@ -144,6 +152,18 @@ export default {
   },
   mounted() {},
   methods: {
+    popupPickerChange(val) {
+      console.log(val);
+    },
+    popupPickerShow() {
+      console.log("popupPickerShow");
+    },
+    popupPickerHide() {
+      console.log("popupPickerHide");
+    },
+    popupPickerConfirm(val) {
+      console.log(val);
+    },
     pcikerChange(val) {
       console.log("picker value", val);
     },

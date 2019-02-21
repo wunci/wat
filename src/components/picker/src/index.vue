@@ -104,7 +104,7 @@ export default {
       if (JSON.stringify(newData) !== JSON.stringify(oldData)) {
         setTimeout(
           () => {
-            this.$emit("change", newData);
+            this.$emit("on-change", newData);
           },
           this.bIsLinkage ? 50 : this.nWaitTime
         );

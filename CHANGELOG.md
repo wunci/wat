@@ -9,6 +9,10 @@
 
 ### [v0.2.8]
 
+*2019 年 2 月 21 日*
+
+* feature 增加 `popup-picker` `popup` 组件
+
 *2019 年 2 月 20 日*
 
 * update 增加限制 `picker` 联动的行数
