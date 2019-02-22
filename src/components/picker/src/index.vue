@@ -4,30 +4,24 @@
     @touchstart="touchstart($event)"
     @touchmove="touchmove($event)"
     @touchend="touchend($event)"
+    v-if="aLists.length > 0"
   >
     <div
       class="wat-picker wat-flex-item"
-      v-for="(list,index) in aLists"
+      v-for="(list, index) in aLists"
       :key="index"
     >
-      <div
-        class="wat-picker_mask"
-        :data-index="index"
-      ></div>
-      <div
-        class="wat-picker_line"
-        :data-index="index"
-      ></div>
+      <div class="wat-picker_mask" :data-index="index"></div>
+      <div class="wat-picker_line" :data-index="index"></div>
       <div class="wat-picker_slider wat-flex">
         <ul
           class="wat-flex-item"
           v-if="aPickerData[index]"
           :style="aPickerData[index].oPosition"
         >
-          <li
-            v-for="(item,index) in list"
-            :key="index"
-          >{{item.name || item}}</li>
+          <li v-for="(item, index) in list" :key="index">
+            {{ item.name || item }}
+          </li>
         </ul>
       </div>
     </div>
@@ -62,8 +56,17 @@ export default {
   },
   created() {
     // copy data
-    this.aLists = this.lists;
+    if (
+      this.columns === undefined ||
+      (this.columns && !isNaN(Number(this.columns)))
+    ) {
+      this.aLists = this.lists;
+    }
     if (this.columns) {
+      if (isNaN(Number(this.columns))) {
+        console.error(`[WAT error] columns 必须是一个数字`);
+        return;
+      }
       this.bIsLinkage = true;
       let aLinkageList = [[]];
       this.aLists.forEach(val => {
@@ -75,15 +78,27 @@ export default {
     }
   },
   mounted() {
+    if (this.columns && isNaN(Number(this.columns))) return;
     this.aPickerData = this.aLists.map((oData, index) => {
       let nFindIndex;
       // 初始化定位
       if (this.value.length > 0) {
-        nFindIndex = oData.findIndex(val => {
-          if (typeof val === "object") {
-            return val.value === this.value[index];
+        nFindIndex = oData.findIndex((val, i) => {
+          let type = typeof val;
+          if (
+            Object.prototype.toString.call(val) === "[object Object]" ||
+            type === "number" ||
+            type === "string"
+          ) {
+            if (type) {
+              return val.value === this.value[index];
+            } else {
+              return val === this.value[index];
+            }
           } else {
-            return val === this.value[index];
+            console.error(
+              `[WAT error] lists元素内不能包含除对象、字符串、数字之外的数据类型，lists[${index}][${i}]`
+            );
           }
         });
         nFindIndex = nFindIndex < 0 ? 0 : nFindIndex;
@@ -118,6 +133,7 @@ export default {
       this.nStartTime = new Date().getTime();
     },
     touchmove(e) {
+      e.preventDefault();
       let nIndex = +e.touches[0].target.dataset.index;
       let clientY = e.touches[0].clientY;
       let nScrollY = parseInt(
@@ -131,13 +147,10 @@ export default {
     },
     touchend(e) {
       let nIndex = +e.changedTouches[0].target.dataset.index;
-      let sDirection =
-        e.changedTouches[0].clientY - this.aPickerData[nIndex].nStartY > 0
-          ? "up"
-          : "down";
       // 加速度
       let nSpeed =
         e.changedTouches[0].clientY - this.aPickerData[nIndex].nStartY;
+      let sDirection = nSpeed > 0 ? "up" : "down";
       if (nSpeed === 0) return;
       let nTime = new Date().getTime() - this.nStartTime;
       if (nTime < 300) {
@@ -147,6 +160,7 @@ export default {
 
       let nScrollY = parseInt(this.aPickerData[nIndex].nEndPosition + nSpeed);
       let nMaxLen = this.aLists[nIndex].length - 4;
+
       // 处理边界问题
       if (Math.abs(nScrollY) > nMaxLen * 34 && sDirection === "down") {
         nScrollY = -nMaxLen * 34;
@@ -160,6 +174,7 @@ export default {
         transition: "all .5s ease-out"
       };
       this.aPickerData[nIndex].nEndPosition = nScrollY;
+
       // if linkage
       if (this.bIsLinkage && +this.columns !== +nIndex + 1) {
         this.aLists = this.resolveLinkageData(
@@ -181,7 +196,7 @@ export default {
       // return result
       let aResult = this.aPickerData.map((val, nIndex) => {
         let result = this.aLists[nIndex][3 - val.nEndPosition / 34];
-        return typeof result === "object" ? result.value : result;
+        return typeof result === "object" ? result.value || "" : result;
       });
       this.aResult = aResult;
     },
@@ -211,7 +226,8 @@ export default {
           bIsNext = true;
         }
       }
-      // 如果没有下一级或者不需要那么多列的情况下（滑动了后续需要联动变化，直接判断aColumns.length === +this.columns会有问题，因为这里aColumns不会清空，需要判断当前更新数据的下标）结束递归
+      // 如果没有下一级或者不需要那么多列的情况下（滑动了后续需要联动变化，直接判断aColumns.length === +this.columns会有问题，
+      // 因为这里aColumns不会清空，需要判断当前更新数据的下标）结束递归
       if (
         !bIsNext ||
         (aColumns.length === +this.columns && nStartIdx + 2 === +this.columns)
