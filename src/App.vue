@@ -1,12 +1,12 @@
 <template>
   <div id="app">
     <h3>toast</h3>
-    <button @click="showToast('success','success')">success</button>
-    <button @click="showToast('fail','fail')">fail</button>
-    <button @click="showDirection('bottom','I\'m from bottom')">bottom</button>
-    <button @click="showDirection('top','I\'m from top')">top</button>
-    <button @click="loading('circular','loading...')">loading-circular</button>
-    <button @click="loading('spinner','loading...')">loading-spinner</button>
+    <button @click="showToast('success', 'success')">success</button>
+    <button @click="showToast('fail', 'fail')">fail</button>
+    <button @click="showDirection('bottom', 'I\'m from bottom')">bottom</button>
+    <button @click="showDirection('top', 'I\'m from top')">top</button>
+    <button @click="loading('circular', 'loading...')">loading-circular</button>
+    <button @click="loading('spinner', 'loading...')">loading-spinner</button>
     <button @click="closeAll">closeAll</button>
     <h3>dialog</h3>
     <button @click="alert">alert</button>
@@ -17,11 +17,7 @@
       columns="3"
       @on-change="pcikerChange"
     />
-    <picker
-      :lists="aList"
-      v-model="pickerValue"
-      @on-change="pcikerChange"
-    />
+    <picker :lists="aList" v-model="pickerValue" @on-change="pcikerChange" />
     <popup-picker
       :lists="aList"
       :title="'12'"
@@ -30,7 +26,9 @@
       @on-show="popupPickerShow"
       @on-hide="popupPickerHide"
       @on-change="popupPickerChange"
-    />
+    >
+      <div>1231</div>
+    </popup-picker>
   </div>
 </template>
 
@@ -50,7 +48,7 @@ export default {
         [
           1,
           { name: "hhh", value: "this is value" },
-          123,
+          "[]",
           41,
           4,
           12,
@@ -88,13 +86,13 @@ export default {
           parent: "0"
         },
         {
-          name: "广东",
-          value: "china001",
+          name: "江西",
+          value: "jx",
           parent: "china"
         },
         {
-          name: "广西",
-          value: "china002",
+          name: "北京",
+          value: "bj",
           parent: "china"
         },
         {
@@ -108,24 +106,24 @@ export default {
           parent: "USA"
         },
         {
-          name: "广州",
-          value: "gz",
-          parent: "china001"
+          name: "南昌",
+          value: "nc",
+          parent: "jx"
         },
         {
-          name: "深圳",
-          value: "sz",
-          parent: "china001"
+          name: "九江",
+          value: "jiujiang",
+          parent: "jx"
         },
         {
-          name: "广西001",
-          value: "gx01",
-          parent: "china002"
+          name: "朝阳区",
+          value: "caoyang",
+          parent: "bj"
         },
         {
-          name: "广西002",
-          value: "gx02",
-          parent: "china002"
+          name: "海淀区",
+          value: "haidian",
+          parent: "bj"
         },
         {
           name: "美国001_001",

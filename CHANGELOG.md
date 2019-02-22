@@ -9,6 +9,10 @@
 
 ### [v0.2.8]
 
+*2019 年 2 月 22 日*
+
+* update 增加错误提示
+
 *2019 年 2 月 21 日*
 
 * feature 增加 `popup-picker` `popup` 组件

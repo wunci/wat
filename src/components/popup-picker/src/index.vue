@@ -1,22 +1,15 @@
 <template>
   <div>
-    <button @click="fnShowModel">popup-picker</button>
-    <Popup
-      v-model="bIsPopupShow"
-      @on-hide="fnHidePopup"
-      @on-show="fnShowPopup"
-    >
+    <div class="wat-popup-select_box" @click="fnShowModel">
+      <button>popup-picker</button>
+      <slot />
+    </div>
+    <Popup v-model="bIsPopupShow" @on-hide="fnHidePopup" @on-show="fnShowPopup">
       <div class="wat-popup-picker">
         <div class="wat-popup-picker_control">
-          <div
-            @click="fnTapCancel"
-            class="wat-popip-control_btn"
-          >取消</div>
-          <div v-if="title !== ''">{{title}}</div>
-          <div
-            @click="fnTapConfirm"
-            class="wat-popip-control_btn"
-          >确定</div>
+          <div @click="fnTapCancel" class="wat-popup-control_btn">取消</div>
+          <div v-if="title !== ''">{{ title }}</div>
+          <div @click="fnTapConfirm" class="wat-popup-control_btn">确定</div>
         </div>
         <Picker
           :lists="lists"
@@ -42,9 +35,7 @@ export default {
       type: Array,
       required: true
     },
-    title: {
-      type: [String, Number]
-    },
+    title: [String, Number],
     value: Array
   },
   data() {
