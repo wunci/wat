@@ -27,50 +27,36 @@
       @on-hide="popupPickerHide"
       @on-change="popupPickerChange"
     >
-      <div>1231</div>
+      <button>popup-picker</button>
     </popup-picker>
+    <datetime
+      v-model="datetimeValue"
+      :title="'时间选择器'"
+      @on-change="popupPickerChange"
+    >
+      <button>时间选择器</button>
+    </datetime>
   </div>
 </template>
 
 <script>
 import Picker from "./components/picker/src/index";
 import PopupPicker from "./components/popup-picker/src/index";
+import Datetime from "./components/datetime/src/index";
 export default {
   name: "app",
   components: {
     Picker,
-    PopupPicker
+    PopupPicker,
+    Datetime
   },
   data() {
     return {
       pickerValue: [23, 41, 2, 1],
+      datetimeValue: [],
       aList: [
-        [
-          1,
-          { name: "hhh", value: "this is value" },
-          "[]",
-          41,
-          4,
-          12,
-          112,
-          12,
-          31,
-          2,
-          4
-        ],
-        [
-          1,
-          23,
-          123,
-          41,
-          4,
-          12,
-          112,
-          12,
-          31,
-          2,
-          { name: "xxx", value: "this is value" }
-        ],
+        [1, { name: "hhh", value: "this is value" }, "[]", 41, 4],
+        [1, 31, 2, { name: "xxx", value: "this is value" }],
         [1, 23, 123, 41, 4, 12, 112, 12, 31, 2, 4],
         [1, 23, 123, 41, 4, 12, 112, 12, 31, 2, 4]
       ],

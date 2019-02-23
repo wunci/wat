@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="wat-popup-select_box" @click="fnShowModel">
-      <button>popup-picker</button>
       <slot />
     </div>
     <Popup v-model="bIsPopupShow" @on-hide="fnHidePopup" @on-show="fnShowPopup">
@@ -14,7 +13,7 @@
         <Picker
           :lists="lists"
           @on-change="fnChangePopUpPicker"
-          v-model="defaultValue"
+          v-model="aDefaultValue"
         />
       </div>
     </Popup>
@@ -41,8 +40,8 @@ export default {
   data() {
     return {
       bIsPopupShow: false,
-      defaultValue: this.value,
-      pickerValue: []
+      aDefaultValue: this.value,
+      aPickerValue: []
     };
   },
   methods: {
@@ -50,7 +49,7 @@ export default {
       this.bIsPopupShow = true;
     },
     fnChangePopUpPicker(val) {
-      this.pickerValue = val;
+      this.aPickerValue = val;
       this.$emit("on-change", val);
     },
     fnHidePopup() {
@@ -66,7 +65,7 @@ export default {
     },
     fnTapConfirm() {
       this.bIsPopupShow = false;
-      this.$emit("on-confirm", this.pickerValue);
+      this.$emit("on-confirm", this.aPickerValue);
       this.$emit("on-hide");
     }
   }
