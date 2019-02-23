@@ -1,20 +1,12 @@
 <template>
   <div>
     <transition name="wat-popup-in">
-      <div
-        class="wat-popup"
-        v-if="show"
-        style="height:238px"
-      >
+      <div class="wat-popup" v-if="show" style="height:238px">
         <slot />
       </div>
     </transition>
     <transition name="wat-fade-in">
-      <div
-        v-if="show"
-        class="wat-model"
-        @click="hideModel"
-      ></div>
+      <div v-if="show" class="wat-model" @click="fnHideModel"></div>
     </transition>
   </div>
 </template>
@@ -43,7 +35,7 @@ export default {
     }
   },
   methods: {
-    hideModel() {
+    fnHideModel() {
       this.show = false;
       this.$emit("on-hide");
     }

@@ -85,15 +85,16 @@ export default {
       if (this.value.length > 0) {
         nFindIndex = oData.findIndex((val, i) => {
           let type = typeof val;
+          let objectType = Object.prototype.toString.call(val);
           if (
-            Object.prototype.toString.call(val) === "[object Object]" ||
+            objectType === "[object Object]" ||
             type === "number" ||
             type === "string"
           ) {
-            if (type) {
-              return val.value === this.value[index];
+            if (objectType === "[object Object]") {
+              return String(val.value) === String(this.value[index]);
             } else {
-              return val === this.value[index];
+              return String(val) === String(this.value[index]);
             }
           } else {
             console.error(
@@ -124,6 +125,21 @@ export default {
           this.bIsLinkage ? 50 : this.nWaitTime
         );
       }
+    },
+    aLists(newData, oldData) {
+      // 数据变化校验是否超出距离，这里主要为了每月的总日数不一致做矫正
+      newData.map((val, i) => {
+        if (val.length - 1 < 3 - this.aPickerData[i].nEndPosition / 34) {
+          let maxVal = (3 - val.length + 1) * 34;
+          this.$set(this.aPickerData, i, {
+            nEndPosition: maxVal,
+            oPosition: {
+              transform: `translate3d(0, ${maxVal}px, 0)`,
+              transition: "all .3s ease-out"
+            }
+          });
+        }
+      });
     }
   },
   methods: {
@@ -196,7 +212,9 @@ export default {
       // return result
       let aResult = this.aPickerData.map((val, nIndex) => {
         let result = this.aLists[nIndex][3 - val.nEndPosition / 34];
-        return typeof result === "object" ? result.value || "" : result;
+        return typeof result === "object"
+          ? String(result.value) || ""
+          : String(result);
       });
       this.aResult = aResult;
     },
