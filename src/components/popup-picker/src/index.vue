@@ -65,7 +65,10 @@ export default {
     },
     fnTapConfirm() {
       this.bIsPopupShow = false;
-      this.$emit("on-confirm", this.aPickerValue);
+      this.$emit(
+        "on-confirm",
+        this.aPickerValue.length === 0 ? this.value : this.aPickerValue
+      );
       this.$emit("on-hide");
     }
   }

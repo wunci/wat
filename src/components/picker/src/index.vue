@@ -4,6 +4,7 @@
     @touchstart="touchstart($event)"
     @touchmove="touchmove($event)"
     @touchend="touchend($event)"
+    @mousedown="touchstart($event)"
     v-if="aLists.length > 0"
   >
     <div
@@ -125,6 +126,7 @@ export default {
           this.bIsLinkage ? 50 : this.nWaitTime
         );
       }
+      console.log("hhh");
     },
     aLists(newData, oldData) {
       // 数据变化校验是否超出距离，这里主要为了每月的总日数不一致做矫正
@@ -144,14 +146,27 @@ export default {
   },
   methods: {
     touchstart(e) {
-      let nIndex = +e.touches[0].target.dataset.index;
-      this.aPickerData[nIndex].nStartY = e.touches[0].clientY;
+      e.preventDefault();
+      let clientY = e.touches ? e.touches[0].pageY : e.pageY;
+      let nIndex = e.touches
+        ? +e.touches[0].target.dataset.index
+        : +e.target.dataset.index;
+      this.aPickerData[nIndex].nStartY = clientY;
       this.nStartTime = new Date().getTime();
+
+      // pc滑动兼容
+      if ("onmousemove" in window) {
+        document.addEventListener("mousemove", this.touchmove, false);
+        document.addEventListener("mouseup", this.touchend, false);
+      }
     },
+
     touchmove(e) {
       e.preventDefault();
-      let nIndex = +e.touches[0].target.dataset.index;
-      let clientY = e.touches[0].clientY;
+      let clientY = e.touches ? e.touches[0].pageY : e.pageY;
+      let nIndex = e.touches
+        ? +e.touches[0].target.dataset.index
+        : +e.target.dataset.index;
       let nScrollY = parseInt(
         this.aPickerData[nIndex].nEndPosition +
           clientY -
@@ -162,10 +177,15 @@ export default {
       };
     },
     touchend(e) {
-      let nIndex = +e.changedTouches[0].target.dataset.index;
+      e.preventDefault();
+
+      let clientY = e.changedTouches ? e.changedTouches[0].pageY : e.pageY;
+      let nIndex = e.changedTouches
+        ? +e.changedTouches[0].target.dataset.index
+        : +e.target.dataset.index;
+
       // 加速度
-      let nSpeed =
-        e.changedTouches[0].clientY - this.aPickerData[nIndex].nStartY;
+      let nSpeed = clientY - this.aPickerData[nIndex].nStartY;
       let sDirection = nSpeed > 0 ? "up" : "down";
       if (nSpeed === 0) return;
       let nTime = new Date().getTime() - this.nStartTime;
@@ -192,10 +212,10 @@ export default {
       this.aPickerData[nIndex].nEndPosition = nScrollY;
 
       // if linkage
-      if (this.bIsLinkage && +this.columns !== +nIndex + 1) {
+      if (this.bIsLinkage && +this.columns !== nIndex + 1) {
         this.aLists = this.resolveLinkageData(
           this.aLists,
-          +nIndex,
+          nIndex,
           3 - nScrollY / 34
         );
         this.aPickerData.forEach((oData, i) => {
@@ -217,6 +237,12 @@ export default {
           : String(result);
       });
       this.aResult = aResult;
+
+      // 移除滑动和抬起时间
+      if ("onmousemove" in window) {
+        document.removeEventListener("mousemove", this.touchmove, false);
+        document.removeEventListener("mouseup", this.touchend, false);
+      }
     },
     /**
      * @description 解析联动数据
