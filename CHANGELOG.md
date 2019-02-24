@@ -12,6 +12,7 @@
 *2019 年 2 月 24 日*
 
 * feature 增加 `vuepress` 生成文档
+* update `picker` 组件支持 `pc` 端滑动使用，便于demo预览
 
 *2019 年 2 月 23 日*
 
