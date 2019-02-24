@@ -13,18 +13,14 @@
   "bugs": {
     "url": "https://github.com/wclimb/wat/issues"
   },
-  "keywords": [
-    "wat",
-    "wat-ui",
-    "vue",
-    "components",
-    "ui"
-  ],
+  "keywords": ["wat", "wat-ui", "vue", "components", "ui"],
   "scripts": {
     "build-bundle": "vue-cli-service build --target lib --name wat ./src/index.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "dependencies": {
     "less": "^3.8.1",
@@ -32,11 +28,12 @@
     "vue": "^2.5.17"
   },
   "devDependencies": {
-    "vue-router": "^3.0.1",
     "@vue/cli-plugin-babel": "^3.0.1",
     "@vue/cli-plugin-eslint": "^3.0.1",
     "@vue/cli-plugin-pwa": "^3.0.1",
     "@vue/cli-service": "^3.0.1",
-    "vue-template-compiler": "^2.5.17"
+    "vue-router": "^3.0.1",
+    "vue-template-compiler": "^2.5.17",
+    "vuepress": "^0.14.9"
   }
 }
