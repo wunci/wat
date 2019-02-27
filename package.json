@@ -18,9 +18,7 @@
     "build-bundle": "vue-cli-service build --target lib --name wat ./src/index.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "less": "^3.8.1",
@@ -33,7 +31,6 @@
     "@vue/cli-plugin-pwa": "^3.0.1",
     "@vue/cli-service": "^3.0.1",
     "vue-router": "^3.0.1",
-    "vue-template-compiler": "^2.5.17",
-    "vuepress": "^0.14.9"
+    "vue-template-compiler": "^2.5.17"
   }
 }

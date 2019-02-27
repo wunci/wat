@@ -9,6 +9,10 @@
 
 ### [v0.2.8]
 
+*2019 年 2 月 27 日*
+
+* delete 删除 `vuepress` 相关
+
 *2019 年 2 月 24 日*
 
 * feature 增加 `vuepress` 生成文档

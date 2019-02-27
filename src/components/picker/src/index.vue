@@ -126,7 +126,6 @@ export default {
           this.bIsLinkage ? 50 : this.nWaitTime
         );
       }
-      console.log("hhh");
     },
     aLists(newData, oldData) {
       // 数据变化校验是否超出距离，这里主要为了每月的总日数不一致做矫正
@@ -151,6 +150,7 @@ export default {
       let nIndex = e.touches
         ? +e.touches[0].target.dataset.index
         : +e.target.dataset.index;
+      this.nIndex = nIndex;
       this.aPickerData[nIndex].nStartY = clientY;
       this.nStartTime = new Date().getTime();
 
@@ -160,13 +160,10 @@ export default {
         document.addEventListener("mouseup", this.touchend, false);
       }
     },
-
     touchmove(e) {
       e.preventDefault();
       let clientY = e.touches ? e.touches[0].pageY : e.pageY;
-      let nIndex = e.touches
-        ? +e.touches[0].target.dataset.index
-        : +e.target.dataset.index;
+      let nIndex = this.nIndex;
       let nScrollY = parseInt(
         this.aPickerData[nIndex].nEndPosition +
           clientY -
@@ -180,9 +177,7 @@ export default {
       e.preventDefault();
 
       let clientY = e.changedTouches ? e.changedTouches[0].pageY : e.pageY;
-      let nIndex = e.changedTouches
-        ? +e.changedTouches[0].target.dataset.index
-        : +e.target.dataset.index;
+      let nIndex = this.nIndex;
 
       // 加速度
       let nSpeed = clientY - this.aPickerData[nIndex].nStartY;
