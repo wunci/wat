@@ -1,6 +1,3 @@
-- [toast](https://github.com/wclimb/wat/blob/master/docs-old/zh-CN/toast.md)
-- [dialog](https://github.com/wclimb/wat/blob/master/docs-old/zh-CN/dialog.md)
-
 ## toast 提示（全局调用）
 
 模拟系统的消息提示框组件，用于消息提示、展示状态。
