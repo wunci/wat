@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import './style/common.less';
 import Toast from './components/toast/src/main';
 import Dialog from './components/dialog/src/main';
