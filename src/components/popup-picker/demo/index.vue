@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="wat-demo">
+    <h3>popup-picker</h3>
     <popup-picker
       :lists="aList"
       :title="'12'"
@@ -9,16 +10,18 @@
       @on-hide="popupPickerHide"
       @on-change="popupPickerChange"
     >
-      <button>popup-picker</button>
+      <wat-button>popup-picker</wat-button>
     </popup-picker>
   </div>
 </template>
 
 <script>
 import PopupPicker from "../src";
+import WatButton from "../../button/src/index";
 export default {
   components: {
-    PopupPicker
+    PopupPicker,
+    WatButton
   },
   data() {
     return {

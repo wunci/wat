@@ -1,20 +1,23 @@
 <template>
-  <div>
+  <div class="wat-demo">
+    <h3>datetime</h3>
     <datetime
       v-model="datetimeValue"
       :title="'时间选择器'"
       @on-change="popupPickerChange"
     >
-      <button>时间选择器</button>
+      <wat-button>时间选择器</wat-button>
     </datetime>
   </div>
 </template>
 
 <script>
 import Datetime from "../src/";
+import WatButton from "../../button/src/index";
 export default {
   components: {
-    Datetime
+    Datetime,
+    WatButton
   },
   data() {
     return {

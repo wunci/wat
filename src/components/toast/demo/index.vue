@@ -1,18 +1,32 @@
 <template>
-  <div>
+  <div class="wat-demo">
     <h3>toast</h3>
-    <button @click="showToast('success', 'success')">success</button>
-    <button @click="showToast('fail', 'fail')">fail</button>
-    <button @click="showDirection('bottom', 'I\'m from bottom')">bottom</button>
-    <button @click="showDirection('top', 'I\'m from top')">top</button>
-    <button @click="loading('circular', 'loading...')">loading-circular</button>
-    <button @click="loading('spinner', 'loading...')">loading-spinner</button>
-    <button @click="closeAll">closeAll</button>
+    <wat-button @click.native="showToast('success', 'success')"
+      >success</wat-button
+    >
+    <wat-button @click.native="showToast('fail', 'fail')">fail</wat-button>
+    <wat-button @click.native="showDirection('bottom', 'I\'m from bottom')"
+      >bottom</wat-button
+    >
+    <wat-button @click.native="showDirection('top', 'I\'m from top')"
+      >top</wat-button
+    >
+    <wat-button @click.native="loading('circular', 'loading...')"
+      >loading-circular</wat-button
+    >
+    <wat-button @click.native="loading('spinner', 'loading...')"
+      >loading-spinner</wat-button
+    >
+    <wat-button @click.native="closeAll">closeAll</wat-button>
   </div>
 </template>
 
 <script>
+import WatButton from "../../button/src/index";
 export default {
+  components: {
+    WatButton
+  },
   data() {
     return {};
   },

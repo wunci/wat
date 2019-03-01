@@ -1,13 +1,17 @@
 <template>
-  <div>
+  <div class="wat-demo">
     <h3>dialog</h3>
-    <button @click="alert">alert</button>
-    <button @click="confirm">confirm</button>
+    <wat-button @click.native="alert">alert</wat-button>
+    <wat-button @click.native="confirm">confirm</wat-button>
   </div>
 </template>
 
 <script>
+import WatButton from "../../button/src/index";
 export default {
+  components: {
+    WatButton
+  },
   methods: {
     alert() {
       this.$dialog

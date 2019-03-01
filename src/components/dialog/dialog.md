@@ -8,7 +8,6 @@
 <template>
   <button @click="open">弹出弹窗</button>
 </template>
-
 ```
 
 ```javascript
@@ -22,13 +21,13 @@
   }
 </script>
 ```
+
 ### confirm
 
 ```html
 <template>
   <button @click="open">弹出弹窗</button>
 </template>
-
 ```
 
 ```javascript
@@ -49,7 +48,6 @@
 ### 完整实例演示
 
 ```javascript
-
 this.$dialog.confirm({
     title: '这是title',
     content: '这是内容',

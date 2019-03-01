@@ -1,0 +1,184 @@
+@import '../../src/style/common.less';
+#docs {
+  width: 1400px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.wat-demo {
+  padding: 20px 0 0 20px;
+  h3 {
+    border-left: 5px solid #3cc51f;
+    padding-left: 15px;
+    margin-bottom: 20px;
+  }
+  button {
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
+}
+
+.wat-docs {
+  max-width: 640px;
+  margin-left: 290px;
+  h3 {
+    border-left: 5px solid #3cc51f;
+    padding-left: 15px;
+    margin: 10px;
+  }
+  button {
+    padding: 0 20px;
+    height: 30px;
+    background: #fff;
+    border: none;
+    margin: 10px;
+    border-radius: 10px;
+    color: #333;
+    border: 1px solid #ccc;
+    outline: none;
+    &:active {
+      background: #ccc;
+    }
+  }
+  a {
+    color: #0079f3;
+  }
+  section {
+    padding: 13px 40px;
+    overflow: hidden;
+  }
+  section > h1,
+  section > h2,
+  section > h3,
+  section > h4,
+  section > h5,
+  section > h6 {
+    line-height: 1.5;
+    font-weight: 400;
+    margin: 20px 0 10px;
+    color: #333;
+  }
+  section > h1 {
+    font-size: 36px;
+  }
+  section > h2 {
+    font-size: 30px;
+    margin-bottom: 25px;
+  }
+  section > h3 {
+    font-size: 22px;
+    margin-top: 45px;
+  }
+  section > h2 + h3 {
+    margin-top: 25px;
+  }
+  section > h4 {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  section > h5 {
+    font-size: 14px;
+  }
+  section > h6 {
+    font-size: 14px;
+    color: #666;
+  }
+  section > p {
+    margin: 15px 0;
+    font-size: 14px;
+    line-height: 26px;
+    color: #34495e;
+  }
+  section > ol li,
+  section > ul li {
+    color: #34495e;
+    font-size: 14px;
+    line-height: 22px;
+    margin: 5px 0 5px 10px;
+    padding-left: 15px;
+    position: relative;
+  }
+  section > ol li:before,
+  section > ul li:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    margin-top: 8px;
+    border-radius: 50%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #666;
+  }
+  section > ol li li,
+  section > ul li li {
+    margin-left: 0;
+  }
+  section > hr {
+    border: 0 none;
+    border-top: 1px solid #eee;
+  }
+  section li > code,
+  section p > code,
+  section table code {
+    margin: 2px;
+    padding: 2px 7px;
+    display: inline;
+  }
+  blockquote {
+    padding: 16px;
+    margin: 20px 0;
+    font-size: 14px;
+    border-radius: 4px;
+    background-color: #ecf9ff;
+    color: rgba(52, 73, 94, 0.8);
+    border-left: 5px solid #50bfff;
+  }
+  table {
+    width: 100%;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 45px;
+    background-color: #fff;
+    border-collapse: collapse;
+    color: #34495e;
+  }
+  table th {
+    padding: 8px 10px;
+    text-align: left;
+    font-weight: 400;
+    background-color: #f1f4f8;
+  }
+  table th:first-child {
+    padding-left: 10px;
+  }
+  table td {
+    padding: 8px;
+    border-bottom: 1px solid #f1f4f8;
+  }
+  table code {
+    font-size: 13px;
+    padding: 0 8px;
+    font-family: inherit;
+    word-break: keep-all;
+  }
+}
+
+code {
+  display: block;
+  font-size: 13px;
+  overflow-x: auto;
+  font-weight: 400;
+  line-height: 22px;
+  border-radius: 3px;
+  margin-bottom: 25px;
+  position: relative;
+  word-break: break-all;
+  white-space: pre-wrap;
+  color: #455a64;
+  padding: 18px 10px 18px 20px;
+  background-color: #f1f4f8;
+  font-family: Source Code Pro, Monaco, Inconsolata, monospace;
+}

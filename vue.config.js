@@ -1,9 +1,10 @@
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production' ? '/wat' : '/',
   runtimeCompiler: true,
   outputDir: 'lib',
   pages: {
     index: {
-      entry: 'docs/main.js',
+      entry: 'docs/docs.js',
     },
   },
   chainWebpack: config => {

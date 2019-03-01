@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="wat-demo">
+    <h3>picker</h3>
     <picker
       :lists="aLinkedList"
       v-model="pickerValue"

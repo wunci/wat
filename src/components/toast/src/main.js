@@ -1,4 +1,4 @@
-import Main from './toast.vue';
+import Main from './index.vue';
 import Vue from 'vue';
 let T = Vue.extend(Main);
 let instance;

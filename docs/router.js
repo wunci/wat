@@ -5,22 +5,15 @@ import Toast from '../src/components/toast/demo';
 import Picker from '../src/components/picker/demo';
 import PopupPicker from '../src/components/popup-picker/demo';
 import Datetime from '../src/components/datetime/demo';
+import Button from '../src/components/button/demo';
+import Docs from './docs.config';
 Vue.use(Router);
 
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
-    {
-      title: 'dialog',
-      path: '/dialog',
-      component: () => import('../src/components/dialog/dialog.md'),
-    },
-    {
-      title: 'toast',
-      path: '/toast',
-      component: () => import('../src/components/toast/toast.md'),
-    },
+    ...Docs,
     {
       title: 'dialog-demo',
       path: '/demo/dialog',
@@ -45,6 +38,11 @@ export default new Router({
       title: 'datetime-demo',
       path: '/demo/datetime',
       component: Datetime,
+    },
+    {
+      title: 'button-demo',
+      path: '/demo/button',
+      component: Button,
     },
   ],
 });

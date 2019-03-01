@@ -1,4 +1,4 @@
-import Main from './dialog.vue';
+import Main from './index.vue';
 import Vue from 'vue';
 const D = Vue.extend(Main);
 let instance;
