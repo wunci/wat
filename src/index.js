@@ -2,7 +2,10 @@ import './style/common.less';
 import Toast from './components/toast/src/main';
 import Dialog from './components/dialog/src/main';
 import Picker from './components/picker/index';
-const components = [Picker];
+import PopupPicker from './components/popup-picker/index';
+import Datetime from './components/datetime/index';
+import Button from './components/button/index';
+const components = [Picker, PopupPicker, Datetime, Picker, Button];
 const install = function(Vue, opts = {}) {
   if (install.installed) return;
   Vue.prototype.$dialog = Dialog;
@@ -22,5 +25,8 @@ const API = {
   Toast,
   Dialog,
   Picker,
+  PopupPicker,
+  Datetime,
+  Button,
 };
 export default API;
