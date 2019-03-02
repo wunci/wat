@@ -22,9 +22,7 @@ export default {
       bIsDemo: /demo/.test(this.$route.path)
     };
   },
-  mounted() {
-    console.log(this.bIsDemo);
-  }
+  mounted() {}
 };
 </script>
 

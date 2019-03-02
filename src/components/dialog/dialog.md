@@ -1,28 +1,8 @@
 ## dialog 弹出框（全局调用）
 
-模拟系统的消息弹出框组件，用于消息提示、操作处理。
+<br>模拟系统的消息弹出框组件，用于消息提示、操作处理。
 
-### alert
-
-```html
-<template>
-  <button @click="open">弹出弹窗</button>
-</template>
-```
-
-```javascript
-<script>
-  export default {
-    methods: {
-      open() {
-        this.$dialog.alert('我是请提示')
-      }
-    }
-  }
-</script>
-```
-
-### confirm
+> alert
 
 ```html
 <template>
@@ -31,21 +11,37 @@
 ```
 
 ```javascript
-<script>
-  export default {
-    methods: {
-      open() {
-        this.$dialog.confirm('我是请提示').then(res=>{
-            // 点击了确定
-        }).catch(res=>{
-            // 点击了取消
-        })
-      }
+export default {
+  methods: {
+    open() {
+      this.$dialog.alert('我是请提示')
     }
   }
-</script>
+}
 ```
-### 完整实例演示
+
+> confirm
+
+```html
+<template>
+  <button @click="open">弹出弹窗</button>
+</template>
+```
+
+```javascript
+export default {
+  methods: {
+    open() {
+      this.$dialog.confirm('我是请提示').then(res=>{
+          // 点击了确定
+      }).catch(res=>{
+          // 点击了取消
+      })
+    }
+  }
+}
+```
+> 完整实例演示
 
 ```javascript
 this.$dialog.confirm({
@@ -62,7 +58,7 @@ this.$dialog.confirm({
 })
 ```
 
-### options
+> Api
 
 | 参数   | 说明    |  类型  |  可选值 | 默认值|
 | :----: | :----:   | :----: |:----: |:----: |
