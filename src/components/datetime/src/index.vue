@@ -63,7 +63,10 @@ export default {
     fnChangePopUpPicker(val) {
       // 判断月份变更，需要修改当月总天数
       let maxDays = getDaysInOneMonth(val[0], val[1]);
-      if (this.aDefaultValue[1] !== val[1]) {
+      if (
+        this.aDefaultValue[1] !== val[1] ||
+        this.aDefaultValue[0] !== val[0]
+      ) {
         let aDays = [];
         for (let i = 1; i <= maxDays; i++) {
           aDays.push(i < 10 ? "0" + i : i);
