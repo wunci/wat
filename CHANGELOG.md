@@ -7,6 +7,14 @@
 * bugfix 修复
 * delete 删除特性
 
+### [v0.2.9]
+
+*2019 年 3 月 3 日*
+
+* update 文档更新
+* bugfix `picker` 组件滑动问题
+* bugfix `$toast.success` 等元素失效问题
+
 ### [v0.2.8]
 
 *2019 年 3 月 2 日*

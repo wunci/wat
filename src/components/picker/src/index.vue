@@ -99,7 +99,7 @@ export default {
             }
           } else {
             console.error(
-              `[WAT error] lists元素内不能包含除对象、字符串、数字之外的数据类型，lists[${index}][${i}]`
+              `[WAT error] lists元素内不能包含除对象、字符串、数字之外的数据类型，-> lists[${index}][${i}]`
             );
           }
         });
@@ -175,7 +175,6 @@ export default {
     },
     touchend(e) {
       e.preventDefault();
-
       let clientY = e.changedTouches ? e.changedTouches[0].pageY : e.pageY;
       let nIndex = this.nIndex;
 
@@ -188,12 +187,11 @@ export default {
         nSpeed = nSpeed * 3;
         this.nWaitTime = 500;
       }
-
       let nScrollY = parseInt(this.aPickerData[nIndex].nEndPosition + nSpeed);
       let nMaxLen = this.aLists[nIndex].length - 4;
 
       // 处理边界问题
-      if (Math.abs(nScrollY) > nMaxLen * 34 && sDirection === "down") {
+      if (nScrollY < -nMaxLen * 34 && sDirection === "down") {
         nScrollY = -nMaxLen * 34;
       } else if (nScrollY > 102 && sDirection === "up") {
         nScrollY = 102;
@@ -223,7 +221,6 @@ export default {
           }
         });
       }
-
       // return result
       let aResult = this.aPickerData.map((val, nIndex) => {
         let result = this.aLists[nIndex][3 - val.nEndPosition / 34];

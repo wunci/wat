@@ -1,8 +1,10 @@
 <template>
   <div class="wat-demo">
     <h3>dialog</h3>
-    <wat-button @click.native="alert">alert</wat-button>
-    <wat-button @click.native="confirm">confirm</wat-button>
+    <div class="ml-20">
+      <wat-button @click.native="alert">alert</wat-button>
+      <wat-button @click.native="confirm">confirm</wat-button>
+    </div>
   </div>
 </template>
 
