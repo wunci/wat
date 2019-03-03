@@ -6,7 +6,9 @@
       :title="'时间选择器'"
       @on-change="popupPickerChange"
     >
-      <wat-button>时间选择器</wat-button>
+      <div class="ml-20">
+        <wat-button>时间选择器</wat-button>
+      </div>
     </datetime>
   </div>
 </template>

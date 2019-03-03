@@ -1,6 +1,7 @@
 <template>
   <div class="wat-demo">
     <h3>popup-picker</h3>
+
     <popup-picker
       :lists="aList"
       :title="'12'"
@@ -10,7 +11,9 @@
       @on-hide="popupPickerHide"
       @on-change="popupPickerChange"
     >
-      <wat-button>popup-picker</wat-button>
+      <div class="ml-20">
+        <wat-button>popup-picker</wat-button>
+      </div>
     </popup-picker>
   </div>
 </template>

@@ -27,7 +27,11 @@ const Toast = options => {
 
 ['success', 'fail', 'loading'].forEach(type => {
   Toast[type] = options => {
-    options.type = type;
+    options = {
+      text: options,
+      type,
+      mask: true,
+    };
     return Toast(options);
   };
 });

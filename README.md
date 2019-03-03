@@ -25,8 +25,7 @@ Vue.use(Wat)
 
 ## Documents
 
-- [toast](https://github.com/wclimb/wat/blob/master/docs-old/zh-CN/toast.md)
-- [dialog](https://github.com/wclimb/wat/blob/master/docs-old/zh-CN/dialog.md)
+http://www.wclimb.site/wat/
 
 ## LICENSE
 MIT
