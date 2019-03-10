@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import WatButton from "../src/index";
+import WatButton from '../src/index';
 export default {
   components: {
     WatButton

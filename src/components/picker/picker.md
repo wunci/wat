@@ -1,6 +1,4 @@
-## dialog 弹出框（全局调用）
-
-<br>模拟系统的消息弹出框组件，用于消息提示、操作处理。
+## Picker 
 
 > 普通滑动列表
 
@@ -12,7 +10,7 @@
 
 ```javascript
 export default {
-  data(){
+  data(){ 
     return{
       pickerValue: [23, 41, 2, 1],
       aList: [
@@ -48,79 +46,114 @@ export default {
 export default {
   data(){
     return{
-      pickerValue: [23, 41, 2, 1],
+      pickerValue: ['china', 'jx', 'jiujiang'],
       aLinkedList: [
         {
-          name: "中国",
-          value: "china",
-          parent: "0"
+          name: '中国',
+          value: 'china',
+          parent: '0'
         },
         {
-          name: "美国",
-          value: "USA",
-          parent: "0"
+          name: '美国',
+          value: 'USA',
+          parent: '0'
         },
         {
-          name: "江西",
-          value: "jx",
-          parent: "china"
+          name: 'LPL',
+          value: 'lpl',
+          parent: '0'
         },
         {
-          name: "北京",
-          value: "bj",
-          parent: "china"
+          name: '江西',
+          value: 'jx',
+          parent: 'china'
         },
         {
-          name: "美国001",
-          value: "usa001",
-          parent: "USA"
+          name: '北京',
+          value: 'bj',
+          parent: 'china'
         },
         {
-          name: "美国002",
-          value: "usa002",
-          parent: "USA"
+          name: 'IG',
+          value: 'ig',
+          parent: 'lpl'
         },
         {
-          name: "南昌",
-          value: "nc",
-          parent: "jx"
+          name: 'RNG',
+          value: 'rng',
+          parent: 'lpl'
         },
         {
-          name: "九江",
-          value: "jiujiang",
-          parent: "jx"
+          name: 'rookie',
+          value: 'rookie',
+          parent: 'ig'
         },
         {
-          name: "朝阳区",
-          value: "caoyang",
-          parent: "bj"
+          name: 'ning',
+          value: 'ning',
+          parent: 'ig'
         },
         {
-          name: "海淀区",
-          value: "haidian",
-          parent: "bj"
+          name: 'mlxg',
+          value: 'mlxg',
+          parent: 'rng'
         },
         {
-          name: "美国001_001",
-          value: "0003",
-          parent: "usa001"
+          name: 'uzi',
+          value: 'uzi',
+          parent: 'rng'
         },
         {
-          name: "美国001_002",
-          value: "0004",
-          parent: "usa001"
+          name: '美国001',
+          value: 'usa001',
+          parent: 'USA'
         },
         {
-          name: "美国002_001",
-          value: "0005",
-          parent: "usa002"
+          name: '美国002',
+          value: 'usa002',
+          parent: 'USA'
         },
         {
-          name: "美国002_002",
-          value: "0006",
-          parent: "usa002"
+          name: '南昌',
+          value: 'nc',
+          parent: 'jx'
+        },
+        {
+          name: '九江',
+          value: 'jiujiang',
+          parent: 'jx'
+        },
+        {
+          name: '朝阳区',
+          value: 'chaoyang',
+          parent: 'bj'
+        },
+        {
+          name: '海淀区',
+          value: 'haidian',
+          parent: 'bj'
+        },
+        {
+          name: '美国001_001',
+          value: '0003',
+          parent: 'usa001'
+        },
+        {
+          name: '美国001_002',
+          value: '0004',
+          parent: 'usa001'
+        },
+        {
+          name: '美国002_001',
+          value: '0005',
+          parent: 'usa002'
+        },
+        {
+          name: '美国002_002',
+          value: '0006',
+          parent: 'usa002'
         }
-      ]
+      ],
     }
   },
   methods: {

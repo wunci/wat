@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "wat-button",
+  name: 'wat-button',
   data() {
     return {};
   },
@@ -16,5 +16,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "./index.less";
+@import './index.less';
 </style>
