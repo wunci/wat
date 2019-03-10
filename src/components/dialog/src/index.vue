@@ -1,16 +1,12 @@
 <template>
   <div class="wat-confirm">
     <transition name="wat-scale-in">
-      <div
-        class="wat-confirm_wrap"
-        :style="zIndexVal(1)"
-        v-if="show"
-      >
+      <div class="wat-confirm_wrap" :style="zIndexVal(1)" v-if="show">
         <div class="wat-confirm_title">
-          {{title}}
+          {{ title }}
         </div>
         <div class="wat-confirm_content">
-          {{content}}
+          {{ content }}
         </div>
         <div class="wat-confirm_ft">
           <a
@@ -18,11 +14,11 @@
             class="wat-confrim_cancel"
             v-if="showCancel"
             @click="hideConfirm('cancel')"
-          >{{cancelBtnText}}</a>
-          <a
-            href="javascript:;"
-            @click="hideConfirm('confirm')"
-          >{{confirmBtnText}}</a>
+            >{{ cancelBtnText }}</a
+          >
+          <a href="javascript:;" @click="hideConfirm('confirm')">{{
+            confirmBtnText
+          }}</a>
         </div>
       </div>
     </transition>
@@ -38,15 +34,15 @@
 </template>
 
 <script>
-import transfer from "../../../directives/transfer.js";
+import transfer from '../../../directives/transfer.js';
 export default {
   data() {
     return {
       show: false,
-      title: "提示",
-      content: "",
-      cancelBtnText: "取消",
-      confirmBtnText: "确定",
+      title: '提示',
+      content: '',
+      cancelBtnText: '取消',
+      confirmBtnText: '确定',
       showCancel: false,
       disabledClick: true,
       zIndex: 2000
@@ -57,7 +53,7 @@ export default {
   },
   methods: {
     hideConfirm(action) {
-      if (this.disabledClick && action === "model") return;
+      if (this.disabledClick && action === 'model') return;
       this.show = false;
       this.callback && this.callback(action);
     },
@@ -71,5 +67,6 @@ export default {
 </script>
 
 <style lang="less">
-@import "./index.less";
+@import '../../../style/variable.less';
+@import './index.less';
 </style>

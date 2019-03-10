@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import Nav from "./components/nav";
-import Mobile from "./components/mobile";
+import Nav from './components/nav';
+import Mobile from './components/mobile';
 export default {
   components: {
     Nav,

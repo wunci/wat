@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  name: "picker",
+  name: 'picker',
   props: {
     // 初始化传进来的值
     lists: {
@@ -71,7 +71,7 @@ export default {
       this.bIsLinkage = true;
       let aLinkageList = [[]];
       this.aLists.forEach(val => {
-        if (val.parent === "0") {
+        if (val.parent === '0') {
           aLinkageList[0].push(val);
         }
       });
@@ -83,16 +83,16 @@ export default {
     this.aPickerData = this.aLists.map((oData, index) => {
       let nFindIndex;
       // 初始化定位
-      if (this.value.length > 0) {
+      if (this.value && this.value.length > 0) {
         nFindIndex = oData.findIndex((val, i) => {
           let type = typeof val;
           let objectType = Object.prototype.toString.call(val);
           if (
-            objectType === "[object Object]" ||
-            type === "number" ||
-            type === "string"
+            objectType === '[object Object]' ||
+            type === 'number' ||
+            type === 'string'
           ) {
-            if (objectType === "[object Object]") {
+            if (objectType === '[object Object]') {
               return String(val.value) === String(this.value[index]);
             } else {
               return String(val) === String(this.value[index]);
@@ -121,7 +121,7 @@ export default {
       if (JSON.stringify(newData) !== JSON.stringify(oldData)) {
         setTimeout(
           () => {
-            this.$emit("on-change", newData);
+            this.$emit('on-change', newData);
           },
           this.bIsLinkage ? 50 : this.nWaitTime
         );
@@ -136,7 +136,7 @@ export default {
             nEndPosition: maxVal,
             oPosition: {
               transform: `translate3d(0, ${maxVal}px, 0)`,
-              transition: "all .3s ease-out"
+              transition: 'all .3s ease-out'
             }
           });
         }
@@ -155,9 +155,9 @@ export default {
       this.nStartTime = new Date().getTime();
 
       // pc滑动兼容
-      if ("onmousemove" in window) {
-        document.addEventListener("mousemove", this.touchmove, false);
-        document.addEventListener("mouseup", this.touchend, false);
+      if ('onmousemove' in window) {
+        document.addEventListener('mousemove', this.touchmove, false);
+        document.addEventListener('mouseup', this.touchend, false);
       }
     },
     touchmove(e) {
@@ -180,7 +180,7 @@ export default {
 
       // 加速度
       let nSpeed = clientY - this.aPickerData[nIndex].nStartY;
-      let sDirection = nSpeed > 0 ? "up" : "down";
+      let sDirection = nSpeed > 0 ? 'up' : 'down';
       if (nSpeed === 0) return;
       let nTime = new Date().getTime() - this.nStartTime;
       if (nTime < 300) {
@@ -191,16 +191,16 @@ export default {
       let nMaxLen = this.aLists[nIndex].length - 4;
 
       // 处理边界问题
-      if (nScrollY < -nMaxLen * 34 && sDirection === "down") {
+      if (nScrollY < -nMaxLen * 34 && sDirection === 'down') {
         nScrollY = -nMaxLen * 34;
-      } else if (nScrollY > 102 && sDirection === "up") {
+      } else if (nScrollY > 102 && sDirection === 'up') {
         nScrollY = 102;
       } else if (nScrollY % 34 !== 0) {
         nScrollY = Math.round(nScrollY / 34) * 34;
       }
       this.aPickerData[nIndex].oPosition = {
         transform: `translate3d(0, ${nScrollY}px, 0)`,
-        transition: "all .5s ease-out"
+        transition: 'all .5s ease-out'
       };
       this.aPickerData[nIndex].nEndPosition = nScrollY;
 
@@ -216,7 +216,7 @@ export default {
             oData.nEndPosition = 102;
             oData.oPosition = {
               transform: `translate3d(0, 102px, 0)`,
-              transition: "all .3s ease-out"
+              transition: 'all .3s ease-out'
             };
           }
         });
@@ -224,16 +224,16 @@ export default {
       // return result
       let aResult = this.aPickerData.map((val, nIndex) => {
         let result = this.aLists[nIndex][3 - val.nEndPosition / 34];
-        return typeof result === "object"
-          ? String(result.value) || ""
+        return typeof result === 'object'
+          ? String(result.value) || ''
           : String(result);
       });
       this.aResult = aResult;
 
       // 移除滑动和抬起时间
-      if ("onmousemove" in window) {
-        document.removeEventListener("mousemove", this.touchmove, false);
-        document.removeEventListener("mouseup", this.touchend, false);
+      if ('onmousemove' in window) {
+        document.removeEventListener('mousemove', this.touchmove, false);
+        document.removeEventListener('mouseup', this.touchend, false);
       }
     },
     /**
@@ -277,5 +277,5 @@ export default {
 </script>
 
 <style scoped lang="less">
-@import "./index.less";
+@import './index.less';
 </style>

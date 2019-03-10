@@ -21,10 +21,10 @@
 </template>
 
 <script>
-import Picker from "../../picker/src/index";
-import Popup from "../../popup/src/index";
+import Picker from '../../picker/src/index';
+import Popup from '../../popup/src/index';
 export default {
-  name: "popup-picker",
+  name: 'popup-picker',
   components: {
     Picker,
     Popup
@@ -50,31 +50,31 @@ export default {
     },
     fnChangePopUpPicker(val) {
       this.aPickerValue = val;
-      this.$emit("on-change", val);
+      this.$emit('on-change', val);
     },
     fnHidePopup() {
       this.bIsPopupShow = false;
-      this.$emit("on-hide");
+      this.$emit('on-hide');
     },
     fnShowPopup() {
-      this.$emit("on-show");
+      this.$emit('on-show');
     },
     fnTapCancel() {
       this.bIsPopupShow = false;
-      this.$emit("on-hide");
+      this.$emit('on-hide');
     },
     fnTapConfirm() {
       this.bIsPopupShow = false;
       this.$emit(
-        "on-confirm",
+        'on-confirm',
         this.aPickerValue.length === 0 ? this.value : this.aPickerValue
       );
-      this.$emit("on-hide");
+      this.$emit('on-hide');
     }
   }
 };
 </script>
 
 <style scoped lang="less">
-@import "./index.less";
+@import './index.less';
 </style>

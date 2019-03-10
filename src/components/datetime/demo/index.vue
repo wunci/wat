@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import Datetime from "../src/";
-import WatButton from "../../button/src/index";
+import Datetime from '../src/';
+import WatButton from '../../button/src/index';
 export default {
   components: {
     Datetime,
@@ -31,16 +31,16 @@ export default {
       console.log(val);
     },
     popupPickerShow() {
-      console.log("popupPickerShow");
+      console.log('popupPickerShow');
     },
     popupPickerHide() {
-      console.log("popupPickerHide");
+      console.log('popupPickerHide');
     },
     popupPickerConfirm(val) {
       console.log(val);
     },
     pcikerChange(val) {
-      console.log("picker value", val);
+      console.log('picker value', val);
     }
   }
 };

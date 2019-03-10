@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import WatButton from "../../button/src/index";
+import WatButton from '../../button/src/index';
 export default {
   components: {
     WatButton
@@ -18,40 +18,40 @@ export default {
     alert() {
       this.$dialog
         .alert({
-          content: "This is content",
-          title: "Tips",
+          content: 'This is content',
+          title: 'Tips',
           disabledClick: false,
           zIndex: 3000,
-          cancelBtnText: "cancel",
-          confirmBtnText: "confirm",
+          cancelBtnText: 'cancel',
+          confirmBtnText: 'confirm',
           callback: () => {
             console.log(1);
           }
         })
         .then(res => {
-          this.$toast.top("click confirm");
+          this.$toast.top('click confirm');
         })
         .catch(res => {
-          this.$toast.top("click cancel");
+          this.$toast.top('click cancel');
         });
     },
     confirm() {
       this.$dialog
         .confirm({
-          content: "This is content",
-          title: "Tips",
+          content: 'This is content',
+          title: 'Tips',
           disabledClick: true,
-          cancelBtnText: "cancel",
-          confirmBtnText: "confirm",
+          cancelBtnText: 'cancel',
+          confirmBtnText: 'confirm',
           callback: () => {
             console.log(1);
           }
         })
         .then(res => {
-          this.$toast("click confirm");
+          this.$toast('click confirm');
         })
         .catch(res => {
-          this.$toast.top("click cancel");
+          this.$toast.top('click cancel');
         });
     }
   }

@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Dialog from '../src/components/dialog/demo';
+import DemoList from './components/demo-list';
 import Toast from '../src/components/toast/demo';
 import Picker from '../src/components/picker/demo';
 import PopupPicker from '../src/components/popup-picker/demo';
@@ -14,6 +15,11 @@ export default new Router({
   base: process.env.NODE_ENV === 'production' ? '/wat' : '/',
   routes: [
     { path: '/', name: 'toast', redirect: '/toast' },
+    {
+      title: 'demo-list',
+      path: '/demo-list',
+      component: DemoList,
+    },
     ...Docs,
     {
       title: 'dialog-demo',
