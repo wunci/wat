@@ -49,6 +49,7 @@ export default {
   data() {
     return {
       bIsLinkage: false,
+      bIsReady: false,
       nWaitTime: 150,
       aLists: [], // copy from lists
       aPickerData: [],
@@ -76,6 +77,7 @@ export default {
         }
       });
       this.aLists = this.resolveLinkageData(aLinkageList);
+      this.bIsReady = true;
     }
   },
   mounted() {
@@ -246,7 +248,11 @@ export default {
       if (+this.columns === 1) return aColumns;
       let len = aColumns.length - 1;
       let bIsNext = false;
-      let value = aColumns[nStartIdx][nFristIdx].value;
+
+      let value =
+        this.value.length > 0 && !this.bIsReady
+          ? this.value[nStartIdx]
+          : aColumns[nStartIdx][nFristIdx].value;
       // 如果当前滑动的列表存在，则重置
       if (aColumns[nStartIdx + 1]) {
         aColumns[nStartIdx + 1] = undefined;
