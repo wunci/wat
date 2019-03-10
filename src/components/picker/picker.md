@@ -12,12 +12,13 @@
 export default {
   data(){ 
     return{
-      pickerValue: [23, 41, 2, 1],
-      aList: [
-        [1, { name: "hhh", value: "this is value" }, "[]", 41, 4],
-        [1, 31, 2, { name: "xxx", value: "this is value" }],
-        [1, 23, 123, 41, 4, 12, 112, 12, 31, 2, 4],
-        [1, 23, 123, 41, 4, 12, 112, 12, 31, 2, 4]
+      pickerValue: ['床', '是', '明', '思'],
+       aList: [
+        ['床', '前', '明', '月', '光'],
+        ['疑', '是', '地', '上', '霜'],
+        ['举', '头', '望', '明', '月'],
+        ['低', '头', '思', '故', '乡']
+        // [1, 31, 2, { name: 'xxx', value: 'this is value' }],
       ],
     }
   },
@@ -46,16 +47,11 @@ export default {
 export default {
   data(){
     return{
-      pickerValue: ['china', 'jx', 'jiujiang'],
+      pickerValue: ['lpl', 'ig', 'ning'],
       aLinkedList: [
         {
           name: '中国',
           value: 'china',
-          parent: '0'
-        },
-        {
-          name: '美国',
-          value: 'USA',
           parent: '0'
         },
         {
@@ -104,16 +100,6 @@ export default {
           parent: 'rng'
         },
         {
-          name: '美国001',
-          value: 'usa001',
-          parent: 'USA'
-        },
-        {
-          name: '美国002',
-          value: 'usa002',
-          parent: 'USA'
-        },
-        {
           name: '南昌',
           value: 'nc',
           parent: 'jx'
@@ -132,28 +118,7 @@ export default {
           name: '海淀区',
           value: 'haidian',
           parent: 'bj'
-        },
-        {
-          name: '美国001_001',
-          value: '0003',
-          parent: 'usa001'
-        },
-        {
-          name: '美国001_002',
-          value: '0004',
-          parent: 'usa001'
-        },
-        {
-          name: '美国002_001',
-          value: '0005',
-          parent: 'usa002'
-        },
-        {
-          name: '美国002_002',
-          value: '0006',
-          parent: 'usa002'
         }
-      ],
     }
   },
   methods: {

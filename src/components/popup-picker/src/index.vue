@@ -6,9 +6,21 @@
     <Popup v-model="bIsPopupShow" @on-hide="fnHidePopup" @on-show="fnShowPopup">
       <div class="wat-popup-picker">
         <div class="wat-popup-picker_control">
-          <div @click="fnTapCancel" class="wat-popup-control_btn">取消</div>
-          <div v-if="title !== ''">{{ title }}</div>
-          <div @click="fnTapConfirm" class="wat-popup-control_btn">确定</div>
+          <div
+            @click="fnTapCancel"
+            class="wat-popup-control_btn wat-popup-cancel_btn"
+          >
+            取消
+          </div>
+          <div class="wat-popup-picker_title" v-if="title !== ''">
+            {{ title }}
+          </div>
+          <div
+            @click="fnTapConfirm"
+            class="wat-popup-control_btn wat-popup-confirm_btn"
+          >
+            确定
+          </div>
         </div>
         <Picker
           :lists="lists"
@@ -76,5 +88,6 @@ export default {
 </script>
 
 <style scoped lang="less">
+@import '../../../style/variable.less';
 @import './index.less';
 </style>

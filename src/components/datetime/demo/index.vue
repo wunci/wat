@@ -4,6 +4,7 @@
     <datetime
       v-model="datetimeValue"
       :title="'时间选择器'"
+      max-year="2022"
       @on-change="popupPickerChange"
     >
       <div class="ml-20">
@@ -23,7 +24,7 @@ export default {
   },
   data() {
     return {
-      datetimeValue: []
+      datetimeValue: [2019, 3, 10]
     };
   },
   methods: {
