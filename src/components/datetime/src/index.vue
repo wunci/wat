@@ -35,6 +35,10 @@ export default {
     minYear: {
       type: [String, Number],
       default: 2000
+    },
+    type: {
+      type: String,
+      default: 'YYYY-MM-dd'
     }
   },
   data() {
@@ -55,7 +59,6 @@ export default {
     }
     this.aLists = getRange(nStartYear, this.maxYear, this.aDefaultValue);
   },
-  computed: {},
   methods: {
     fnShowModel() {
       this.bIsPopupShow = true;
