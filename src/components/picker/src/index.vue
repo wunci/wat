@@ -1,10 +1,9 @@
 <template>
-  <div
+  <Touch
     class="wat-flex"
-    @touchstart="touchstart($event)"
-    @touchmove="touchmove($event)"
-    @touchend="touchend($event)"
-    @mousedown="touchstart($event)"
+    @touchstart="touchstart"
+    @touchmove="touchmove"
+    @touchend="touchend"
     v-if="aLists.length > 0"
   >
     <div
@@ -26,12 +25,16 @@
         </ul>
       </div>
     </div>
-  </div>
+  </Touch>
 </template>
 
 <script>
+import Touch from '../../common/Touch';
 export default {
   name: 'picker',
+  components: {
+    Touch
+  },
   props: {
     // 初始化传进来的值
     lists: {
@@ -57,66 +60,8 @@ export default {
     };
   },
   created() {
-    // copy data
-    if (
-      this.columns === undefined ||
-      (this.columns && !isNaN(Number(this.columns)))
-    ) {
-      this.aLists = this.lists;
-    }
-    if (this.columns) {
-      if (isNaN(Number(this.columns))) {
-        console.error(`[WAT error] columns 必须是一个数字`);
-        return;
-      }
-      this.bIsLinkage = true;
-      let aLinkageList = [[]];
-      this.aLists.forEach(val => {
-        if (val.parent === '0') {
-          aLinkageList[0].push(val);
-        }
-      });
-      this.aLists = this.resolveLinkageData(aLinkageList);
-      this.bIsReady = true;
-    }
-  },
-  mounted() {
-    if (this.columns && isNaN(Number(this.columns))) return;
-    this.aPickerData = this.aLists.map((oData, index) => {
-      let nFindIndex;
-      // 初始化定位
-      if (this.value && this.value.length > 0) {
-        nFindIndex = oData.findIndex((val, i) => {
-          let type = typeof val;
-          let objectType = Object.prototype.toString.call(val);
-          if (
-            objectType === '[object Object]' ||
-            type === 'number' ||
-            type === 'string'
-          ) {
-            if (objectType === '[object Object]') {
-              return String(val.value) === String(this.value[index]);
-            } else {
-              return String(val) === String(this.value[index]);
-            }
-          } else {
-            console.error(
-              `[WAT error] lists元素内不能包含除对象、字符串、数字之外的数据类型，-> lists[${index}][${i}]`
-            );
-          }
-        });
-        nFindIndex = nFindIndex < 0 ? 0 : nFindIndex;
-      } else {
-        nFindIndex = 0;
-      }
-      return {
-        nStartY: 0,
-        nEndPosition: (3 - nFindIndex) * 34,
-        oPosition: {
-          transform: `translate3d(0, ${(3 - nFindIndex) * 34}px, 0)`
-        }
-      };
-    });
+    this.fnLinkageInit();
+    this.fnInitSetValue();
   },
   watch: {
     aResult(newData, oldData) {
@@ -146,25 +91,15 @@ export default {
     }
   },
   methods: {
-    touchstart(e) {
-      e.preventDefault();
-      let clientY = e.touches ? e.touches[0].pageY : e.pageY;
-      let nIndex = e.touches
-        ? +e.touches[0].target.dataset.index
-        : +e.target.dataset.index;
-      this.nIndex = nIndex;
+    touchstart(oVal) {
+      let clientY = oVal.Y;
+      let nIndex = oVal.nIndex;
+      this.nIndex = oVal.nIndex;
       this.aPickerData[nIndex].nStartY = clientY;
       this.nStartTime = new Date().getTime();
-
-      // pc滑动兼容
-      if ('onmousemove' in window) {
-        document.addEventListener('mousemove', this.touchmove, false);
-        document.addEventListener('mouseup', this.touchend, false);
-      }
     },
-    touchmove(e) {
-      e.preventDefault();
-      let clientY = e.touches ? e.touches[0].pageY : e.pageY;
+    touchmove(oVal) {
+      let clientY = oVal.Y;
       let nIndex = this.nIndex;
       let nScrollY = parseInt(
         this.aPickerData[nIndex].nEndPosition +
@@ -175,11 +110,9 @@ export default {
         transform: `translate3d(0, ${nScrollY}px, 0)`
       };
     },
-    touchend(e) {
-      e.preventDefault();
-      let clientY = e.changedTouches ? e.changedTouches[0].pageY : e.pageY;
+    touchend(oVal) {
+      let clientY = oVal.Y;
       let nIndex = this.nIndex;
-
       // 加速度
       let nSpeed = clientY - this.aPickerData[nIndex].nStartY;
       let sDirection = nSpeed > 0 ? 'up' : 'down';
@@ -231,12 +164,6 @@ export default {
           : String(result);
       });
       this.aResult = aResult;
-
-      // 移除滑动和抬起时间
-      if ('onmousemove' in window) {
-        document.removeEventListener('mousemove', this.touchmove, false);
-        document.removeEventListener('mouseup', this.touchend, false);
-      }
     },
     /**
      * @description 解析联动数据
@@ -277,6 +204,68 @@ export default {
         return aColumns;
       }
       return this.resolveLinkageData(aColumns, nStartIdx + 1, 0);
+    },
+    fnLinkageInit() {
+      // copy data
+      if (
+        this.columns === undefined ||
+        (this.columns && !isNaN(Number(this.columns)))
+      ) {
+        this.aLists = this.lists;
+      }
+      if (this.columns) {
+        if (isNaN(Number(this.columns))) {
+          console.error(`[WAT error] columns 必须是一个数字`);
+          return;
+        }
+        this.bIsLinkage = true;
+        let aLinkageList = [[]];
+        this.aLists.forEach(val => {
+          if (val.parent === '0') {
+            aLinkageList[0].push(val);
+          }
+        });
+        this.aLists = this.resolveLinkageData(aLinkageList);
+        this.bIsReady = true;
+      }
+    },
+    fnInitSetValue() {
+      if (this.columns && isNaN(Number(this.columns))) return;
+      this.aPickerData = this.aLists.map((oData, index) => {
+        let nFindIndex;
+        // 初始化定位
+        if (this.value && this.value.length > 0) {
+          nFindIndex = oData.findIndex((val, i) => {
+            let type = typeof val;
+            let objectType = Object.prototype.toString.call(val);
+            if (
+              objectType === '[object Object]' ||
+              type === 'number' ||
+              type === 'string'
+            ) {
+              if (objectType === '[object Object]') {
+                return String(val.value) === String(this.value[index]);
+              } else {
+                return String(val) === String(this.value[index]);
+              }
+            } else {
+              console.error(
+                `[WAT error] lists元素内不能包含除对象、字符串、数字之外的数据类型，-> lists[${index}][${i}]`
+              );
+            }
+          });
+          nFindIndex = nFindIndex < 0 ? 0 : nFindIndex;
+        } else {
+          nFindIndex = 0;
+        }
+        return {
+          nStartY: 0,
+          nEndPosition: (3 - nFindIndex) * 34,
+          oPosition: {
+            transform: `translate3d(0, ${(3 - nFindIndex) * 34}px, 0)`
+          }
+        };
+      });
     }
   }
 };

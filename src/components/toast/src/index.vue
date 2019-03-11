@@ -73,7 +73,7 @@ export default {
   directives: {
     transfer
   },
-  mounted() {
+  created() {
     this.init();
   },
   methods: {
