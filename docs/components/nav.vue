@@ -27,6 +27,7 @@ export default {};
   border-right: 1px solid #f1f4f8;
   background: #fff;
   z-index: 1;
+  padding-top: 70px;
   div {
     padding-right: 30px;
   }

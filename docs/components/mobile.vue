@@ -17,7 +17,7 @@ export default {
 #wat-mobile {
   display: inline-block;
   position: fixed;
-  top: 60px;
+  top: 90px;
   margin-left: 980px;
   border-radius: 10px;
   overflow: hidden;
