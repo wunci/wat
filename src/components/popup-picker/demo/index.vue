@@ -1,7 +1,6 @@
 <template>
   <div class="wat-demo">
     <h3>popup-picker</h3>
-
     <popup-picker
       :lists="aList"
       :title="'12'"
@@ -29,7 +28,6 @@ export default {
   data() {
     return {
       pickerValue: [23, 41, 2, 1],
-      datetimeValue: [],
       aList: [
         [1, { name: 'hhh', value: 'this is value' }, '[]', 41, 4],
         [1, 31, 2, { name: 'xxx', value: 'this is value' }],

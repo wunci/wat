@@ -109,7 +109,7 @@ export default {
     },
     fnChangePopUpPicker(val) {
       // 判断月份变更，需要修改当月总天数
-      if (this.type === 'YYYY-MM-DD') {
+      if (/YYYY-MM-DD/.test(this.type)) {
         let maxDays = getDaysInOneMonth(val[0], val[1]);
         if (
           this.aDefaultValue[1] !== val[1] ||
