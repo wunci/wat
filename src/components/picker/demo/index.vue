@@ -9,7 +9,7 @@
       @on-change="pcikerChange1"
     />
     <div>{{ value2 }}</div>
-    <picker :lists="aList" v-model="pickerValue2" @on-change="pcikerChange2" />
+    <!-- <picker :lists="aList" v-model="pickerValue2" @on-change="pcikerChange2" /> -->
   </div>
 </template>
 
@@ -21,7 +21,7 @@ export default {
   },
   data() {
     return {
-      pickerValue1: ['lpl', 'ig', 'ning'],
+      pickerValue1: [],
       pickerValue2: ['床', '是', '明', '思'],
       aList: [
         ['床', '前', '明', '月', '光'],
@@ -37,8 +37,8 @@ export default {
           parent: '0'
         },
         {
-          name: 'LPL',
-          value: 'lpl',
+          name: '南昌',
+          value: 'nanchang',
           parent: '0'
         },
         {
@@ -52,34 +52,34 @@ export default {
           parent: 'china'
         },
         {
-          name: 'IG',
-          value: 'ig',
-          parent: 'lpl'
+          name: '大桥',
+          value: 'bridge',
+          parent: 'nanchang'
         },
         {
-          name: 'RNG',
-          value: 'rng',
-          parent: 'lpl'
+          name: '早餐',
+          value: 'breakfast',
+          parent: 'nanchang'
         },
         {
-          name: 'rookie',
-          value: 'rookie',
-          parent: 'ig'
+          name: '八一大桥',
+          value: 'bayi',
+          parent: 'bridge'
         },
         {
-          name: 'ning',
-          value: 'ning',
-          parent: 'ig'
+          name: '南昌大桥',
+          value: 'ncdq',
+          parent: 'bridge'
         },
         {
-          name: 'mlxg',
-          value: 'mlxg',
-          parent: 'rng'
+          name: '南昌炒粉',
+          value: 'nccf',
+          parent: 'breakfast'
         },
         {
-          name: 'uzi',
-          value: 'uzi',
-          parent: 'rng'
+          name: '瓦罐汤',
+          value: 'wgt',
+          parent: 'breakfast'
         },
         {
           name: '南昌',
@@ -102,7 +102,7 @@ export default {
           parent: 'bj'
         }
       ],
-      value1: ['lpl', 'ig', 'ning'],
+      value1: [],
       value2: ['床', '是', '明', '思']
     };
   },

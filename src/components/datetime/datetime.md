@@ -1,11 +1,46 @@
 ## Datetime
 
+> YYY-MM-DD hh
+
+```html
+<template>
+  <datetime
+    v-model="datetimeValue"
+    :title="'时间选择器'"
+    max-year="2022"
+    max-month="10"
+    max-days="20"
+    min-days="10"
+    type="YYYY-MM-DD hh"
+  >
+    <div class="ml-20">
+      <wat-button>默认</wat-button>
+    </div>
+  </datetime>
+</template>
+```
+
+```javascript
+export default {
+  methods: {
+    data(){
+      return {
+        datetimeValue: [2019, 3, 10]
+      }
+    }
+    popupPickerChange(val) {
+      console.log(val);
+    },
+  }
+}
+```
+
 > Api
 
 | 参数   | 说明    |  类型  |  可选值 | 
 | :----: | :----:   | :----: |:----: |
 |   title    |   标题    |   String    |  -    |  
-|   type    |   类型    |   String    |  YYYY-MM-DD    |  
+|   type    |   类型    |   String    |  YYYY-MM-DD hh:mm   |  
 |   min-year    |   最小年份    |   String    |  -    |  
 |   max-year    |   最大年份    |   String    |  -    | 
 |   max-month    |   最大月    |   String    |  -    |  
@@ -21,7 +56,7 @@
 
 | 事件名   | 说明    |  参数  |  
 | :----: | :----:   | :----: |
-|   @on-show    |   组件显示触发    |   方法名    |  
-|   @on-hide    |   组件隐藏触发    |   方法名    |  
-|   @on-confirm    |   点击确定触发    |   方法名    |  
-|   @on-change    |   滑动改变触发    |   方法名    |  
+|   @on-show    |   组件显示触发    |   Function    |  
+|   @on-hide    |   组件隐藏触发    |   Function    |  
+|   @on-confirm    |   点击确定触发    |   Function    |  
+|   @on-change    |   滑动改变触发    |   Function    |  

@@ -9,6 +9,13 @@
 
 ### [v0.2.11]
 
+*2019 年 3 月 14 日*
+
+* update 更新文档
+* bugfix `datetime` 组件 `type` 判断的 `bug` 
+
+### [v0.2.11]
+
 *2019 年 3 月 13 日*
 
 * update `datetime` 组件更新，支持 `YYYY-MM-DD hh:mm` ...
