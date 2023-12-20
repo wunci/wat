@@ -25,7 +25,6 @@ Vue.use(Wat)
 
 ## Documents
 
-http://www.wclimb.site/wat/
 
 ## LICENSE
 MIT
